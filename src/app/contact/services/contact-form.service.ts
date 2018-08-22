@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, FormArray, AbstractControl } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, FormArray, AbstractControl, Validators } from '@angular/forms';
 
 import { ContactModule } from '../contact.module';
 import { Contact, labels } from '../models';
@@ -13,14 +13,14 @@ export class ContactFormService {
     private formBuilder: FormBuilder
   ) { }
 
-  public generateForm(): FormGroup {
+  public generateForm(contact?: Contact): FormGroup {
     this.form = this.formBuilder.group({
       id: new FormControl(undefined),
       name: new FormGroup({
-        first: new FormControl(''),
-        last: new FormControl('')
+        first: new FormControl(contact ? contact.name.first : ''),
+        last: new FormControl(contact ? contact.name.last : '')
       }),
-      phone: new FormArray([new FormControl('')])
+      phone: new FormArray(contact ? this.generatePhones(contact.phone) : this.generatePhones())
     });
 
     return this.form;
@@ -35,6 +35,18 @@ export class ContactFormService {
 
   public addPhoneControl() {
     (this.form.get('phone') as FormArray).push(new FormControl(''));
+  }
+
+  public removePhoneControl(index) {
+    (this.form.get('phone') as FormArray).removeAt(index);
+  }
+
+  private generatePhones(phones?: string[]) {
+    if (phones) {
+      return phones.map((phone) => new FormControl(phone, Validators.required));
+    } else {
+      return [new FormControl('', Validators.required)];
+    }
   }
 
   private getFormControl(name: string, group: FormGroup | AbstractControl): AbstractControl {

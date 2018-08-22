@@ -1,1 +1,14 @@
-contact-list
+<div class="contacts-wrapper">
+  <ng-container *ngFor="let group of contacts$ | async">
+    <h3>{{group.name}}</h3>
+    <div class="list-group">
+      <a class="list-group-item list-group-item-action"
+        *ngFor="let contact of group.contacts"
+        [routerLink]="['../' + contact.id]">
+          {{contact.name.first}} {{contact.name.last}}
+
+        <!-- <span [innerHTML]="closeIcon | icon" class="icon" (click)="removeContact(contact)"></span> -->
+      </a>
+    </div>
+  </ng-container>
+</div>

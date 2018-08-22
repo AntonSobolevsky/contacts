@@ -1,17 +1,23 @@
-form {
+.contacts-wrapper {
   width: 400px;
 
-  margin: 0 auto;
-  padding: 24px;
+  margin: 24px auto;
+  padding: 0 24px;
+
+  border: 1px solid transparent;
 
   background-color: #fdfdfd;
   box-shadow: 0 0 2px 4px rgba(51, 51, 51, .1);
 }
 
-.input-wrapper {
+h3 {
+  margin-top: 24px;
+}
+
+a {
   position: relative;
 
-  &:not(:first-child):hover .icon {
+  &:hover .icon {
     display: inline;
   }
 }
@@ -20,6 +26,6 @@ form {
   display: none;
   position: absolute;
 
-  top: 8px;
+  top: 16px;
   right: 10px;
 }

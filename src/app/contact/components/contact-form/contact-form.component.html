@@ -1,4 +1,6 @@
-<form [formGroup]="form" (ngSubmit)="submitForm()">
+<form *ngIf="form" [formGroup]="form" (ngSubmit)="submitForm()">
+  <h5 class="text-center mb-4">Contact</h5>
+
   <ng-container *ngTemplateOutlet="formElement; context: { config: getFormElementContext('name.first') }"></ng-container>
 
   <ng-container *ngTemplateOutlet="formElement; context: { config: getFormElementContext('name.last') }"></ng-container>
@@ -6,9 +8,11 @@
   <div class="form-group row">
     <label class="col-sm-4 col-form-label col-form-label-sm">Phone</label>
     <div class="col-sm-8">
-      <ng-container *ngFor="let control of form.get('phone').controls; let first = first">
+      <div class="input-wrapper" *ngFor="let control of getPhonesArray().controls; let index = index">
         <input class="form-control form-control-sm mb-2" type="text" [formControl]="control">
-      </ng-container>
+
+        <div [innerHTML]="closeIcon | icon" class="icon" (click)="removePhone(index)"></div>
+      </div>
 
       <button type="button" class="btn btn-sm btn-link" (click)="addPhone()">Add phone</button>
     </div>
