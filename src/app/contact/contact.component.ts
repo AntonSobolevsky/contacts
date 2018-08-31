@@ -5,15 +5,12 @@ import { Contact } from './models';
 
 @Component({
   selector: 'app-contact',
-  template: '<router-outlet><router-outlet>'
+  template: '<router-outlet></router-outlet>'
 })
 export class ContactComponent implements OnInit {
-
   public contacts$: Observable<Contact[]>;
 
-  constructor(
-    private contactService: ContactService
-  ) {}
+  constructor(private contactService: ContactService) {}
 
   public ngOnInit() {
     this.contacts$ = this.contactService.getContacts();

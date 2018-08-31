@@ -7,8 +7,7 @@ import * as octicons from 'octicons';
 
 import { ContactService } from '../../services/contact.service';
 import { Contact } from '../../models';
-import { ContactListService, ContactsView } from '../../services/contact-list.service';
-
+import { ContactListService } from './contact-list.service';
 
 @Component({
   selector: 'app-contact-list',
@@ -17,26 +16,31 @@ import { ContactListService, ContactsView } from '../../services/contact-list.se
   providers: [ContactListService]
 })
 export class ContactListComponent implements OnInit {
+  public contacts$: Observable<Contact[]>;
 
-  public contacts$: Observable<ContactsView[]>;
-
-  public closeIcon: string;
+  public plusIcon: string;
+  public filterType: string;
 
   constructor(
     private contactListService: ContactListService,
     private contactService: ContactService,
     private router: Router,
     private route: ActivatedRoute
-  ) {}
+  ) {
+    this.filterType = 'name.first';
+  }
 
   public ngOnInit() {
-    this.contacts$ = this.contactListService.groupBy('name.first', this.contactService.getContacts());
+    this.contacts$ = this.contactService.getContacts();
 
-    this.closeIcon = octicons.x.toSVG({ 'class': 'close' });
+    this.plusIcon = octicons.plus.toSVG({ class: 'icon-plus' });
   }
 
-  public removeContact(contact: Contact) {
-    this.contactService.removeContact(contact.id);
+  public filterList(searchValue: string) {
+    this.contacts$ = this.contactListService.filter(
+      searchValue,
+      this.contactService.getContacts(),
+      this.filterType
+    );
   }
-
 }

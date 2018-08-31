@@ -1,14 +1,27 @@
-<div class="contacts-wrapper">
-  <ng-container *ngFor="let group of contacts$ | async">
-    <h3>{{group.name}}</h3>
-    <div class="list-group">
-      <a class="list-group-item list-group-item-action"
-        *ngFor="let contact of group.contacts"
-        [routerLink]="['../' + contact.id]">
-          {{contact.name.first}} {{contact.name.last}}
-
-        <!-- <span [innerHTML]="closeIcon | icon" class="icon" (click)="removeContact(contact)"></span> -->
-      </a>
+<div class="container-fluid">
+  <div class="contacts-wrapper">
+    <div class="contacts-header">
+      <a class="btn btn-sm add-button" [routerLink]="['../add']" [innerHTML]="plusIcon | icon"></a>
     </div>
-  </ng-container>
+
+    <div class="filter-block">
+      <app-contact-filter (changeValue)="filterList($event)"></app-contact-filter>
+      <select class="custom-select custom-select-sm" [(ngModel)]="filterType">
+        <option value="name.first">First name</option>
+        <option value="name.last">Last name</option>
+        <option value="phone">Phone number</option>
+      </select>
+    </div>
+
+    <ng-container *ngFor="let group of contacts$ | async | sortBy: 'name.first' : 'asc' | groupBy: 'name.first'">
+      <h3>{{group.name}}</h3>
+      <div class="list-group">
+        <a class="list-group-item list-group-item-action"
+          *ngFor="let contact of group.values"
+          [routerLink]="['../' + contact.id]">
+            {{contact.name.first}} {{contact.name.last}}
+        </a>
+      </div>
+    </ng-container>
+  </div>
 </div>

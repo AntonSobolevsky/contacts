@@ -1,11 +1,11 @@
 form {
-  width: 400px;
+  max-width: 400px;
 
-  margin: 0 auto;
+  margin: 24px auto 0;
   padding: 24px;
 
   background-color: #fdfdfd;
-  box-shadow: 0 0 2px 4px rgba(51, 51, 51, .1);
+  box-shadow: 0 0 2px 2px rgba(51, 51, 51, 0.1);
 }
 
 .input-wrapper {
@@ -22,4 +22,9 @@ form {
 
   top: 8px;
   right: 10px;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
 }

@@ -1,17 +1,24 @@
 .contacts-wrapper {
-  width: 400px;
+  max-width: 400px;
 
   margin: 24px auto;
   padding: 0 24px;
+  padding-bottom: 24px;
 
   border: 1px solid transparent;
 
   background-color: #fdfdfd;
-  box-shadow: 0 0 2px 4px rgba(51, 51, 51, .1);
+  box-shadow: 0 0 2px 2px rgba(51, 51, 51, 0.1);
+}
+
+.contacts-header {
+  padding-top: 16px;
+
+  text-align: center;
 }
 
 h3 {
-  margin-top: 24px;
+  margin-top: 18px;
 }
 
 a {
@@ -28,4 +35,32 @@ a {
 
   top: 16px;
   right: 10px;
+}
+
+.add-button {
+  position: fixed;
+  bottom: 40px;
+  right: 10px;
+
+  padding: 12px 17px;
+
+  border-radius: 50%;
+
+  background-color: #85cb33;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+  z-index: 2;
+}
+
+.filter-block {
+  display: flex;
+
+  align-items: center;
+}
+
+.custom-select {
+  width: 155px;
+
+  margin-left: 10px;
+
+  background-color: #fff;
 }

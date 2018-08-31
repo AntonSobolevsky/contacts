@@ -15,6 +15,10 @@ const routes: Routes = [
     component: ContactListComponent
   },
   {
+    path: 'add',
+    component: ContactFormComponent
+  },
+  {
     path: ':id',
     component: ContactFormComponent
   }
@@ -24,4 +28,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class ContactRoutingModule { }
+export class ContactRoutingModule {}

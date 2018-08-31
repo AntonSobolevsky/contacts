@@ -10,5 +10,5 @@ export interface Contact {
 export const labels = {
   'name.first': 'First name',
   'name.last': 'Last name',
-  'phone': 'Phones'
+  phone: 'Phones'
 };
